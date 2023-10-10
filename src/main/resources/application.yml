@@ -1,0 +1,51 @@
+server :
+  port : 8090
+
+
+
+# 데이터 베이스 세팅
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test #Memory DB
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto:  create-drop #배포 시 none 반대 create-drop, 데이터 베이스를 내가 직접 생성
+      show_sql: true
+    generate-ddl: true #배포 시 false 반대 true, true로하면 데이터가 날라가고 flase로 하면 데이터가 남는다
+
+
+    properties:
+      format_sql: true
+      hibernate:
+        show-sql: true
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  mustache:
+    suffix: .html
+
+logging:
+  level:
+    org.hibernate.SQL: trace
+    org.hibernate.type: trace
+
+file:
+  upload-dir: ./uploads
